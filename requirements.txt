@@ -3,5 +3,4 @@ numpy
 tensorflow
 keras
 scikit-learn
-pickle
 streamlit
