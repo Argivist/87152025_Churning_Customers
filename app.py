@@ -26,10 +26,10 @@ def pred(input,model):
     else:
         pred=finalmodel.predict(input_expanded)
     if(pred>5):
-        return "This customer wil churn"
+        return "This customer wil churn",pred
     else:
-        return "This customer will not churn"
-    return pred
+        return "This customer will not churn",pred
+
     
 
 
@@ -87,9 +87,9 @@ def main():
     
     ####predicting output
     if(st.button("Predict")):
-        pr=pred(entry,1)
+        pr=pred(entry,1)[0]
         st.write(pr)
-        print(pred(entry,1))
+        print(pred(entry,1)[1])
     
     
 if __name__=='__main__':
