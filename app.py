@@ -25,12 +25,9 @@ def pred(input,model):
         pred=bestmodel.predict(input_expanded)
     else:
         pred=finalmodel.predict(input_expanded)
-    if(pred[0][0]>0.5):
-        return "This customer will churn",pred[0][0]
-    else:
-        return "This customer will not churn",pred[0][0]
+    return (float)(pred[0][0])
 
-    
+     
 
 
 #Application
@@ -75,21 +72,22 @@ def main():
         TechSupport_No=False
     else:
         TechSupport_No=True  
-    Contract_Month_to_month=st.checkbox('Has Fiber optic',key="checkbox3")
+    Contract_Month_to_month=st.checkbox('On a month to month contract',key="checkbox3")
     Contract_Two_year=st.checkbox('On a 2 year contract',key="checkbox4")
     PaymentMethod_Electronic_check=st.checkbox('Uses Electronic check',key="checkbox5")
     entries=[InternetService_Fiber_optic,OnlineSecurity_No,TechSupport_No,Contract_Month_to_month,Contract_Two_year,PaymentMethod_Electronic_check]
     entry=[]
-    entry.append(tenure)
+
     for i in entries:
         if i: entry.append(1) 
         else: entry.append(0)
+    entry.append(tenure)
     
     ####predicting output
     if(st.button("Predict")):
-        pr=pred(entry,1)[0]
+        pr=pred(entry,1)
         st.write(pr)
-        print(pred(entry,1)[1])
+        print(pred(entry,1))
     
     
 if __name__=='__main__':
