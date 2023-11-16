@@ -87,8 +87,9 @@ def main():
     
     ####predicting output
     if(st.button("Predict")):
-        st.write(pred(entry,1))
-    
+        pr=pred(entry,1)
+        st.write(pr)
+        print(pred(entry,1))
     
     
 if __name__=='__main__':
