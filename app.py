@@ -25,8 +25,8 @@ def pred(input,model):
         pred=bestmodel.predict(input_expanded)
     else:
         pred=finalmodel.predict(input_expanded)
-    if(pred>5):
-        return "This customer wil churn",pred
+    if(pred>0.5):
+        return "This customer will churn",pred
     else:
         return "This customer will not churn",pred
 
