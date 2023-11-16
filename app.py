@@ -26,9 +26,9 @@ def pred(input,model):
     else:
         pred=finalmodel.predict(input_expanded)
     if(pred[0][0]>0.5):
-        return "This customer will churn",pred
+        return "This customer will churn",pred[0][0]
     else:
-        return "This customer will not churn",pred
+        return "This customer will not churn",pred[0][0]
 
     
 
