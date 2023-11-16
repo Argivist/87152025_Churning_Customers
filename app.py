@@ -56,10 +56,9 @@ def main():
     #inputs
     
     tenure=st.number_input("Tenure",step=10)
-    #scaling the tenure
-    scaling=pd.DataFrame([[tenure,0,0]],columns=['tenure', 'MonthlyCharges', 'TotalCharges'])
-    scaled=sc.transform(scaling)
-    tenure=scaled[0][0]
+
+    
+    
     
     InternetService_Fiber_optic=st.checkbox('Uses Fiber optice',key="checkbox")
     os=st.checkbox('Has Online Security',key="checkbox1")
@@ -75,19 +74,27 @@ def main():
     Contract_Month_to_month=st.checkbox('On a month to month contract',key="checkbox3")
     Contract_Two_year=st.checkbox('On a 2 year contract',key="checkbox4")
     PaymentMethod_Electronic_check=st.checkbox('Uses Electronic check',key="checkbox5")
-    entries=[InternetService_Fiber_optic,OnlineSecurity_No,TechSupport_No,Contract_Month_to_month,Contract_Two_year,PaymentMethod_Electronic_check]
-    entry=[]
-
-    for i in entries:
-        if i: entry.append(1) 
-        else: entry.append(0)
-    entry.append(tenure)
     
     ####predicting output
     if(st.button("Predict")):
-        pr=pred(entry,1)
-        st.write(pr)
-        print(pred(entry,1))
+            #scaling the tenure
+        scaling=pd.DataFrame([[tenure,0,0]],columns=['tenure', 'MonthlyCharges', 'TotalCharges'])
+        scaled=sc.transform(scaling)
+        tenure=scaled[0][0]
+        #
+        entries=[InternetService_Fiber_optic,OnlineSecurity_No,TechSupport_No,Contract_Month_to_month,Contract_Two_year,PaymentMethod_Electronic_check]
+        entry=[]
+        for i in entries:
+            if i: entry.append(1) 
+            else: entry.append(0)
+        entry.append(tenure)
+        entries=[]
+        pr=pred(entry,0)
+        if pr>0.5:        
+            st.success("This customer will churn")
+        else:        
+            st.error("This customer will not churn")
+
     
     
 if __name__=='__main__':
